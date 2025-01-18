@@ -16,8 +16,8 @@ export const App = () => {
       <div className="main-Container">
         <Suspense fallback={<Loading />}>
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/hosting" element={<HostingPage />} />
+            <Route path="/h" element={<HomePage />} />
+            <Route path="/" element={<HostingPage />} />
           </Routes>
         </Suspense>
       </div>

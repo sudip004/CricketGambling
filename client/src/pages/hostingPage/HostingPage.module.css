@@ -1,0 +1,230 @@
+.mainContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    background: linear-gradient(198deg, rgba(15, 4, 27, 1), rgba(32, 4, 57, 1));
+    -webkit-background: linear-gradient(198deg, rgba(15, 4, 27, 1), rgba(32, 4, 57, 1));
+    -moz-background: linear-gradient(198deg, rgba(15, 4, 27, 1), rgba(32, 4, 57, 1));
+}
+
+.logoContainer {
+    width: 100%;
+    height: 3rem;
+    /* border: 1px solid red; */
+}
+.logoContainer>h1{
+    color: #FFF;
+font-size: 1.8rem;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.cameraContainer {
+    margin-top: 2rem;
+    width: 100%;
+    height: 15rem;
+    border: 1px solid rgb(219, 230, 212);
+}
+
+.cameraContainer>h1{
+color: #FFF;
+font-family: Georgia, 'Times New Roman', Times, serif;
+font-size: 1.8rem;
+}
+
+
+
+/* //------------------- */
+
+.dataContainer {
+    margin-top: 1rem;
+    width: 100%;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* border: 1px solid red; */
+}
+
+.firstDataContainer {
+    width: 100%;
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* border: 1px solid blue; */
+}
+
+.runsContainer{
+    width: 16rem;
+    height: 6.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    /* border: 1px solid green; */
+}
+.runcontainerfirstBox{
+    width: 100%;
+    height: 4.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* border: 1px solid red; */
+}
+
+.runcontainerfirstBox>button{
+    width: 2.5rem;
+    height: 2.2rem;
+    background: #FFF;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.plusicon{
+    width: 100%;
+    height: 100%;
+    color: blue;
+}
+
+.runBox{
+    width: 6.8rem;
+    height: 2.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    background: #f5e8e8;
+    color: black;
+    border-radius: 7px;
+    /* border: 1px solid blue; */
+}
+.extrabolscontainer{
+width: 100%;
+height: 1.3rem;
+display: flex;
+align-items: center;
+justify-content: space-around;
+}
+.extrabolscontainer>button{
+    width: 1.8rem;
+    height: 1.2rem;
+    background: #d10a7e;
+    color: rgb(241, 245, 242);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    border-radius: 20%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.currentBatterContainer{
+    width: 14rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    /* border: 1px solid red; */
+}
+.currentbattheading{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.1rem;
+    color: #FFF;
+}
+.player1container{
+width: 100%;
+height: 2.5rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+/* border: 1px solid yellow; */
+}
+.player1container>h2{
+    color: #FFF;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1rem;
+}
+.player1container>div{
+    width: 3.2rem;
+    height: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFF;
+    color: black;
+    /* border: 1px solid red; */
+    border-radius: 4px;
+}
+
+
+
+.SecondDataContainer {
+width: 100%;
+height: 10rem;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 2rem;
+/* border: 2px solid green; */
+}
+.teamContainer{
+width: 24rem;
+height: 90%;
+display: flex;
+flex-direction: column;
+gap: 1.5rem;
+/* border: 1px solid blue; */
+}
+.teamContainer>h3{
+width: 100%;
+height: 0.8rem;
+color: #FFF;
+}
+
+.playerlistContainer{
+width: 100%;
+height: 70%;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content: flex-start;
+gap: 1rem;
+overflow-y: scroll;
+scrollbar-width: none;
+/* border: 1px solid red; */
+}
+.playerNameContainer{
+width: 100%;
+height: 1.6rem;
+display: flex;
+align-items: center;
+justify-content: space-around;
+/* border: 1px solid green; */
+}
+.playerNameContainer>p{
+width: 50%;
+font-family: Georgia, 'Times New Roman', Times, serif;
+font-size: 1.1rem;
+color: #FFF;
+}
+
+.playerNameContainer>div{
+width: 2rem;
+height: 100%;
+border-radius: 10%;
+display: flex;
+align-items: center;
+justify-content: center;
+background: #fdf6f6;
+cursor: pointer;
+}
+.playerIcon{
+    color: blue;
+    width: 1rem;
+    height: 1rem;
+}
