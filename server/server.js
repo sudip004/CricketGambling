@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const { dbConncetion } = require('./db/db');
 // User Router part
-const route = require("./routes/UserRoutes");
+const router = require("./routes/UserRoutes");
 
 
 const port =process.env.PORT || 3000;
@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
-app.use("api",route)
+app.use("/api",router)
 
 
 

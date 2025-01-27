@@ -6,8 +6,8 @@ const {UserModel} = require('../models/UserModel');
 
 const userRegister = async (req, res) => {
     const { name, email, password,role } = req.body;
-    const user = new UserModel({ name, email, password,role });
     try {
+        const user = new UserModel({ name, email, password,role });
         await user.save();
         res.status(201).send('User registered successfully');
     } catch (error) {
@@ -23,10 +23,11 @@ const userLogin = async (req, res) => {
         if(!user) return res.status(404).send('User not found');
         const isMatch = await user.comparePassword(password);
         if(!isMatch) return res.status(400).send('Invalid credentials');
+        console.log(user._id);
         
 
         // start codeing jwt and seesion
-        const token = jwt.sign({ id: user._id, username: user.username,role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
+        const token = jwt.sign({ _id: user._id, username: user.name,role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
         res.cookie('token', token, { httpOnly: true });
         res.status(200).send('User logged in successfully');
 

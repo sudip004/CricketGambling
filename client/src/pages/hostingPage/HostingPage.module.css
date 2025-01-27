@@ -122,14 +122,51 @@ justify-content: space-around;
 }
 
 .currentBatterContainer{
-    width: 14rem;
+    position: relative;
+    width: 18rem;
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     gap: 0.8rem;
     /* border: 1px solid red; */
+}
+.playerBoxes{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    border: 1px solid blue;
+    background: linear-gradient(198deg, rgba(15, 4, 27, 1), rgba(32, 4, 57, 1));
+    overflow-y: scroll;
+    scrollbar-width: none;
+    z-index: 1;
+}
+.disnone{
+    display: none;
+}
+.onlyplayername{
+    width: 100%;
+    height: 1.6rem;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    cursor: pointer;
+    color:#fff;
+    border-bottom: 1px solid #fdfcfd;
+    transition: all 0.3s ease-in;
+}
+.onlyplayername:hover{
+    background: #d10a7e;
+    color: #fdfcfd;
+    transform: scaleX(1.1);
+    padding-left: 1rem;
+    border-radius: 50px;
 }
 .currentbattheading{
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -137,17 +174,35 @@ justify-content: space-around;
     color: #FFF;
 }
 .player1container{
+
 width: 100%;
 height: 2.5rem;
 display: flex;
 align-items: center;
 justify-content: space-between;
+cursor: pointer;
 /* border: 1px solid yellow; */
 }
+.player1containermark{
+    width: 100%;
+height: 2.5rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border: 1px solid #f5e8e8;
+border-radius: 10px;
+cursor: pointer;
+}
+
 .player1container>h2{
     color: #FFF;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 1rem;
+    font-size: 0.8rem;
+}
+.player1containermark>h2{
+    color: #FFF;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 0.8rem;
 }
 .player1container>div{
     width: 3.2rem;
@@ -160,7 +215,34 @@ justify-content: space-between;
     /* border: 1px solid red; */
     border-radius: 4px;
 }
-
+.player1containermark>div{
+    width: 3.2rem;
+    height: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFF;
+    color: black;
+    border-radius: 4px;
+}
+.selectPlayerbtn{
+    width: 3.2rem;
+    height: 1.7rem;
+    background: #d10a7e;
+    color: #f5e8e8;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    border-radius: 40px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.selectPlayerbtn:hover{
+    background: #f5e8e8;
+    color: #d10a7e;
+    transform: scaleX(1.1);
+}
 
 
 .SecondDataContainer {
@@ -171,6 +253,7 @@ align-items: center;
 justify-content: center;
 gap: 2rem;
 /* border: 2px solid green; */
+
 }
 .teamContainer{
 width: 24rem;
@@ -180,11 +263,58 @@ flex-direction: column;
 gap: 1.5rem;
 /* border: 1px solid blue; */
 }
-.teamContainer>h3{
+.teamContainerSelected{
+    width: 24rem;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border: 1px solid #fdfcfd;
+    box-shadow: 0px 1px 1px 1px #fdfcfd;
+    
+}
+.teamContainer >h3{
 width: 100%;
 height: 0.8rem;
 color: #FFF;
+display: flex;
+align-items: center;
+justify-content: space-between;
+transition: all 0.5s ease;
 }
+.teamContainerSelected >h3{
+    width: 100%;
+height: 0.8rem;
+color: #FFF;
+display: flex;
+align-items: center;
+justify-content: space-between;
+transition: all 0.5s ease;
+}
+
+.teamContainer >h3>span{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.1rem;
+    text-align: center;
+   padding-right: 1rem;
+   margin-top: 0.5rem;
+   padding-left: 0.5rem;
+   background: #d10a7e;
+   color: #FFF;
+border-radius: 20px;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+.teamContainer>h3>span:hover{
+    background: #FFF;
+    color: #d10a7e;
+    transform: scaleX(1.1);
+}
+
+.teamContainerSelected >h3>span{
+display: none;
+}
+
 
 .playerlistContainer{
 width: 100%;
