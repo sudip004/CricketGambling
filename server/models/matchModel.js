@@ -13,6 +13,7 @@ const teamSchema = new mongoose.Schema({
   totalRuns: { type: Number, default: 0 },
   totalWickets: { type: Number, default: 0 },
   players: [playerSchema],
+  totalOvers: { type: Number, default: 0 },
 });
 
 const matchSchema = new mongoose.Schema({
@@ -23,7 +24,7 @@ const matchSchema = new mongoose.Schema({
   status: {
     type: String,
     enum: ['draft', 'live', 'completed'], // Status to track match stage
-    default: 'draft',
+    default: 'live',
   },
   isHosting: { type: Boolean, default: false },
 });

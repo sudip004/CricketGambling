@@ -23,41 +23,37 @@ router.patch('/matchupdate/:id', authenticate, async (req, res) => {
     try {
         const matchId = req.params.id;
 
-        // Find the match by ID
-        const match = await Match.findById(matchId);
+        // Find and update the match in one step
+        const match = await Match.findByIdAndUpdate(
+            matchId, 
+            req.body, 
+            { new: true, runValidators: true }  // ✅ Returns updated document & validates
+        );
 
         if (!match) {
             return res.status(404).send({ message: 'Match not found' });
         }
 
-        // Check if the match is live and the current user is the creator
-        if (match.status === 'live' && String(match.createdBy) !== String(req.user._id)) {
-            return res.status(403).send({ message: 'You are not authorized to update this match' });
-        }
-
-        // Update the match with the provided fields
-        Object.assign(match, req.body);
-
-        await match.save();
-
         res.send(match);
-        console.log("all successfull");
-        
+        console.log("Match updated successfully");
+
     } catch (err) {
-        console.log(err);
-        
+        console.log("Server Error:", err);
         res.status(400).send({ message: err.message });
     }
 });
 
 // Get Matches
-router.get('/matches', authenticate, async (req, res) => {
+router.get('/findcurrentmatch/:id', authenticate, async (req, res) => {
     try {
-        const matches = await Match.find({ createdBy: req.user._id });
-        res.json(matches);
+        const matchId = req.params.id;
+        const matches = await Match.findById(matchId);
+        res.send(matches);
     } catch (err) {
         res.status(500).send(err.message);
     }
 });
+
+
 
 module.exports = router;

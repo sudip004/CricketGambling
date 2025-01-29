@@ -1,5 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const cookie = require("cookie-parser");
 
 // file locations
 const {UserModel} = require('../models/UserModel');
@@ -27,9 +28,9 @@ const userLogin = async (req, res) => {
         
 
         // start codeing jwt and seesion
-        const token = jwt.sign({ _id: user._id, username: user.name,role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
-        res.cookie('token', token, { httpOnly: true });
-        res.status(200).send('User logged in successfully');
+        const token = jwt.sign({ _id: user._id, username: user.name,role: user.role }, "sudipbasak", { expiresIn: '1d' });
+        res.cookie('token', token,{httpOnly:true,secure:process.env.NODE_ENV === 'production',});
+        res.status(200).json({message:"user login", token });
 
     }catch(error){
         res.status(400).send(error.message);
