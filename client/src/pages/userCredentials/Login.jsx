@@ -26,6 +26,16 @@ const Login = () => {
     
     // Save token to localStorage
     // localStorage.setItem('authToken', token);
+
+    // cretae balance for the user
+     const response1 = await axios.get('http://localhost:3000/api/balance', {
+      withCredentials: true,
+    });
+    if(response1.data){
+      console.log("User already have balance");
+    }else{
+      await axios.post('http://localhost:3000/api/balance', {}, { withCredentials: true });
+    }
     
     // Navigate to the next page
     navigate('/p');

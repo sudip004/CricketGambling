@@ -13,11 +13,13 @@ const teamSchema = new mongoose.Schema({
   totalRuns: { type: Number, default: 0 },
   totalWickets: { type: Number, default: 0 },
   players: [playerSchema],
-  totalOvers: { type: Number, default: 0 },
+  totalOvers: { type: Number, default: 0.0 },
+  isMatchEnded: { type: Boolean, default: false },
+  isBatting: { type: Boolean, default: false },
 });
 
 const matchSchema = new mongoose.Schema({
-  target: { type: Number },
+  target: { type: Number,default:0 },
   overs: { type: Number, required: true },
   teams: [teamSchema],
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
@@ -27,6 +29,7 @@ const matchSchema = new mongoose.Schema({
     default: 'live',
   },
   isHosting: { type: Boolean, default: false },
+  WiningTeam: { type: String },
 });
 
 module.exports = mongoose.model('Match', matchSchema);
