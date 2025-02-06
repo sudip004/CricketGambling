@@ -76,6 +76,15 @@ router.get('/findlivematches', authenticate, async (req, res) => {
         res.status(500).send(err.message);
     }
 });
+//upcomming matches
+router.get('/draftmatches', authenticate, async (req, res) => {
+    try {
+        const matches = await Match.find({ status: 'draft' });
+        res.send(matches);
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+});
 
 
 // Create Prediction By User
@@ -169,6 +178,18 @@ router.patch('/balance', authenticate, async (req, res) => {
     }
 });
 
+//logout
+router.post('/logout', authenticate, async (req, res) => {
+    try {
+        req.user.tokens = req.user.tokens.filter((token) => {
+            return token.token !== req.token;
+        });
+        await req.user.save();
+        res.send();
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+});
 
 
 

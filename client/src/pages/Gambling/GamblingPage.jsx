@@ -4,15 +4,22 @@ import { useParams } from "react-router-dom"
 import axios from 'axios';
 import { GiCricketBat } from "react-icons/gi";
 import { BiSolidCricketBall } from "react-icons/bi"
+import {useNavigate} from 'react-router-dom'
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 const GamblingPage = () => {
 
+    const navigate = useNavigate()
 
     const { id } = useParams();
 
     const [matchdata, setMatchData] = useState([])
     const [predictData, setpredictData] = useState(null)
-    const [amount, setAmount] = useState(100)
+    const [amountwiningteam, setamountwiningteam] = useState(100)
+    const [amounttwoover, setamounttwoover] = useState(100)
+    const [amountfiveover, setamountfiveover] = useState(100)
+    const [amounttotalrun, setamounttotalrun] = useState(100)
+    const [amounttotalwicket, setamounttotalwicket] = useState(100)
 
     console.log("ohkk", predictData);
 
@@ -23,7 +30,7 @@ const GamblingPage = () => {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/findcurrentmatch/${id}`, {
+                const response = await axios.get(`${import.meta.env.VITE_BACKENDURL}/api/findcurrentmatch/${id}`, {
                     withCredentials: true
                 });
 
@@ -57,7 +64,7 @@ const GamblingPage = () => {
 
         const fetchdata = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/findprediction/${id}`, {
+                const response = await axios.get(`${import.meta.env.VITE_BACKENDURL}/api/findprediction/${id}`, {
                     withCredentials: true
                 });
 
@@ -98,16 +105,16 @@ const GamblingPage = () => {
         try {
             if (predictData != null) {
                 const response = await axios.patch(
-                    `http://localhost:3000/api/prediction/${predictData._id}`,
-                    { predictedWinnerTeam: predictedWinner, amountBetforwinner: amount },
+                    `${import.meta.env.VITE_BACKENDURL}/api/prediction/${predictData._id}`,
+                    { predictedWinnerTeam: predictedWinner, amountBetforwinner: amountwiningteam },
                     { withCredentials: true }
                 );
                 console.log("Prediction response:", response.data);
                 setpredictData(response.data);
             } else {
                 const response = await axios.post(
-                    `http://localhost:3000/api/prediction/${id}`,
-                    { predictedWinnerTeam: predictedWinner, amountBetforwinner: amount },
+                    `${import.meta.env.VITE_BACKENDURL}/api/prediction/${id}`,
+                    { predictedWinnerTeam: predictedWinner, amountBetforwinner: amountwiningteam },
                     { withCredentials: true }
                 );
                 console.log("Prediction response:", response.data);
@@ -137,12 +144,12 @@ const GamblingPage = () => {
 
             const requestData = {
                 afterTwoOvers: [{ team: predictedWinner, decision: res }],
-                amountBetfortwoover: amount  // ✅ FIXED HERE
+                amountBetfortwoover: amounttwoover  // ✅ FIXED HERE
             };
 
             if (predictData != null) {
                 const response = await axios.patch(
-                    `http://localhost:3000/api/prediction/${predictData._id}`,
+                    `${import.meta.env.VITE_BACKENDURL}/api/prediction/${predictData._id}`,
                     requestData,
                     { withCredentials: true }
                 );
@@ -150,7 +157,7 @@ const GamblingPage = () => {
                 setpredictData(response.data);
             } else {
                 const response = await axios.post(
-                    `http://localhost:3000/api/prediction/${id}`,
+                    `${import.meta.env.VITE_BACKENDURL}/api/prediction/${id}`,
                     requestData,
                     { withCredentials: true }
                 );
@@ -179,12 +186,12 @@ const GamblingPage = () => {
 
             const requestData = {
                 afterFiveOvers: [{ team: predictedWinner, decision: res }],
-                amountBetforfiveover: amount  // ✅ FIXED HERE
+                amountBetforfiveover: amountfiveover  // ✅ FIXED HERE
             };
 
             if (predictData != null) {
                 const response = await axios.patch(
-                    `http://localhost:3000/api/prediction/${predictData._id}`,
+                    `${import.meta.env.VITE_BACKENDURL}/api/prediction/${predictData._id}`,
                     requestData,
                     { withCredentials: true }
                 );
@@ -192,7 +199,7 @@ const GamblingPage = () => {
                 setpredictData(response.data);
             } else {
                 const response = await axios.post(
-                    `http://localhost:3000/api/prediction/${id}`,
+                    `${import.meta.env.VITE_BACKENDURL}/api/prediction/${id}`,
                     requestData,
                     { withCredentials: true }
                 );
@@ -216,16 +223,16 @@ const GamblingPage = () => {
 
             if (predictData != null) {
                 const response = await axios.patch(
-                    `http://localhost:3000/api/prediction/${predictData._id}`,
-                    { totalWicket: res, amountBetfortotalwicket: amount },
+                    `${import.meta.env.VITE_BACKENDURL}/api/prediction/${predictData._id}`,
+                    { totalWicket: res, amountBetfortotalwicket: amounttotalwicket },
                     { withCredentials: true }
                 );
                 console.log("Aftertwover fun response:", response.data);
                 setpredictData(response.data);
             } else {
                 const response = await axios.post(
-                    `http://localhost:3000/api/prediction/${id}`,
-                    { totalWicket: res, amountBetfortotalwicket: amount },
+                    `${import.meta.env.VITE_BACKENDURL}/api/prediction/${id}`,
+                    { totalWicket: res, amountBetfortotalwicket: amounttotalwicket },
                     { withCredentials: true }
                 );
                 console.log("Aftertwover fun response:", response.data);
@@ -247,10 +254,10 @@ const GamblingPage = () => {
 
             if (predictData != null) {
                 const response = await axios.patch(
-                    `http://localhost:3000/api/prediction/${predictData._id}`,
+                    `${import.meta.env.VITE_BACKENDURL}/api/prediction/${predictData._id}`,
                     {
                         totalRuns: res,
-                        amountBetforrotalruns: amount
+                        amountBetforrotalruns: amounttotalrun
                     },
                     { withCredentials: true }
                 );
@@ -258,8 +265,8 @@ const GamblingPage = () => {
                 setpredictData(response.data);
             } else {
                 const response = await axios.post(
-                    `http://localhost:3000/api/prediction/${id}`,
-                    { totalRuns: res },
+                    `${import.meta.env.VITE_BACKENDURL}/api/prediction/${id}`,
+                    { totalRuns: res , amountBetforrotalruns: amounttotalrun},
                     { withCredentials: true }
                 );
                 console.log("Aftertwover fun response:", response.data);
@@ -300,7 +307,7 @@ const GamblingPage = () => {
                     console.log("paooooooooooooooooooooo", predictData.payout);
 
                     const response = await axios.patch(
-                        `http://localhost:3000/api/prediction/${predictData._id}`,
+                        `${import.meta.env.VITE_BACKENDURL}/api/prediction/${predictData._id}`,
                         {
                             payout: predictData.payout + payoutAmount, // ✅ Accumulate payout
                             amountBetfortwoover: 0, // ✅ Reset bet
@@ -309,11 +316,11 @@ const GamblingPage = () => {
                     );
 
                     // Balance Update
-                    const response1 = await axios.get('http://localhost:3000/api/balance', {
+                    const response1 = await axios.get(`${import.meta.env.VITE_BACKENDURL}/api/balance`, {
                         withCredentials: true,
                     });
                     if (response1?.data) {
-                        await axios.patch('http://localhost:3000/api/balance', {
+                        await axios.patch(`${import.meta.env.VITE_BACKENDURL}/api/balance`, {
                             balance: response1?.data?.balance + payoutAmount
                         }, {
                             withCredentials: true,
@@ -376,7 +383,7 @@ const GamblingPage = () => {
                     console.log("paooooooooooooooooooooo", predictData.payout);
 
                     const response = await axios.patch(
-                        `http://localhost:3000/api/prediction/${predictData._id}`,
+                        `${import.meta.env.VITE_BACKENDURL}/api/prediction/${predictData._id}`,
                         {
                             payout: predictData.payout + payoutAmount, // ✅ Accumulate payout
                             amountBetforfiveover: 0, // ✅ Reset bet
@@ -385,11 +392,11 @@ const GamblingPage = () => {
                     );
 
                     // Balance Update
-                    const response1 = await axios.get('http://localhost:3000/api/balance', {
+                    const response1 = await axios.get(`${import.meta.env.VITE_BACKENDURL}/api/balance`, {
                         withCredentials: true,
                     });
                     if (response1?.data) {
-                        await axios.patch('http://localhost:3000/api/balance', {
+                        await axios.patch(`${import.meta.env.VITE_BACKENDURL}/api/balance`, {
                             balance: response1?.data?.balance + payoutAmount
                         }, {
                             withCredentials: true,
@@ -449,7 +456,7 @@ const GamblingPage = () => {
                     console.log("Payout for total runs:", payoutAmount);
 
                     const response = await axios.patch(
-                        `http://localhost:3000/api/prediction/${predictData._id}`,
+                        `${import.meta.env.VITE_BACKENDURL}/api/prediction/${predictData._id}`,
                         {
                             payout: predictData.payout + payoutAmount, // ✅ Accumulate payout
                             amountBetforrotalruns: 0, // ✅ Reset bet
@@ -458,11 +465,11 @@ const GamblingPage = () => {
                     );
 
                     // Balance Update
-                    const response1 = await axios.get('http://localhost:3000/api/balance', {
+                    const response1 = await axios.get(`${import.meta.env.VITE_BACKENDURL}/api/balance`, {
                         withCredentials: true,
                     });
                     if (response1?.data) {
-                        await axios.patch('http://localhost:3000/api/balance', {
+                        await axios.patch(`${import.meta.env.VITE_BACKENDURL}/api/balance`, {
                             balance: response1?.data?.balance + payoutAmount
                         }, {
                             withCredentials: true,
@@ -516,7 +523,7 @@ const GamblingPage = () => {
                     console.log("Payout for total wickets:", payoutAmount);
 
                     const response = await axios.patch(
-                        `http://localhost:3000/api/prediction/${predictData._id}`,
+                        `${import.meta.env.VITE_BACKENDURL}/api/prediction/${predictData._id}`,
                         {
                             payout: predictData.payout + payoutAmount, // ✅ Accumulate payout
                             amountBetfortotalwicket: 0, // ✅ Reset bet
@@ -525,11 +532,11 @@ const GamblingPage = () => {
                     );
 
                     // Balance Update
-                    const response1 = await axios.get('http://localhost:3000/api/balance', {
+                    const response1 = await axios.get(`${import.meta.env.VITE_BACKENDURL}/api/balance`, {
                         withCredentials: true,
                     });
                     if (response1?.data) {
-                        await axios.patch('http://localhost:3000/api/balance', {
+                        await axios.patch(`${import.meta.env.VITE_BACKENDURL}/api/balance`, {
                             balance: response1?.data?.balance + payoutAmount
                         }, {
                             withCredentials: true,
@@ -580,7 +587,7 @@ const GamblingPage = () => {
                     console.log("Payout for predicted winner:", payoutAmount);
 
                     const response = await axios.patch(
-                        `http://localhost:3000/api/prediction/${predictData._id}`,
+                        `${import.meta.env.VITE_BACKENDURL}/api/prediction/${predictData._id}`,
                         {
                             payout: predictData.payout + payoutAmount, // ✅ Accumulate payout
                             amountBetforwinner: 0, // ✅ Reset bet
@@ -589,11 +596,11 @@ const GamblingPage = () => {
                     );
 
                     // Balance Update
-                    const response1 = await axios.get('http://localhost:3000/api/balance', {
+                    const response1 = await axios.get(`${import.meta.env.VITE_BACKENDURL}/api/balance`, {
                         withCredentials: true,
                     });
                     if (response1?.data) {
-                        await axios.patch('http://localhost:3000/api/balance', {
+                        await axios.patch(`${import.meta.env.VITE_BACKENDURL}/api/balance`, {
                             balance: response1?.data?.balance + payoutAmount
                         }, {
                             withCredentials: true,
@@ -620,23 +627,28 @@ const GamblingPage = () => {
         }
     }, [matchdata?.status]); // ✅ Runs when match status changes to "completed"
 
+
+
+
+
     return (
         <>
             {(matchdata && matchdata?.teams && matchdata?.teams?.length >= 2) ? (
                 <div className={styles.maincontainer}>
+                    <div className={styles.backbtn} onClick={()=>navigate("/")}><IoIosArrowRoundBack className={styles.iconbackk} onClick={()=>navigate("/")}/></div>
                     <div className={styles.firstcontainer}>
                         <div className={styles.firstleftcontainer}>CAMERA - PART</div>
                         <div className={styles.firstrightcontainer}>
                             <h2>SAMUDRAGARH - PREMIER - LEAGUE</h2>
                             <div className={styles.boxcontainer}>
                                 <div className={styles.leftbox}>
-                                    <div className={styles.teamname}>{matchdata.teams[0].teamName} (Group-A)</div>
+                                    <div className={styles.teamname}>{matchdata.teams[0].teamName} (Group-A){matchdata.teams[0].isBatting ?  <GiCricketBat className={styles.icon}/> : "" }</div>
                                     <div className={styles.runbox}>{matchdata.teams[0].totalRuns}/{matchdata.teams[0].totalWickets}</div>
                                     <div className={styles.overcount}>({matchdata.teams[0].totalOvers}).overs</div>
                                 </div>
                                 <div className={styles.vs}>v/s</div>
                                 <div className={styles.leftbox}>
-                                    <div className={styles.teamname}>{matchdata.teams[1].teamName} (Group-B)</div>
+                                    <div className={styles.teamname}>{matchdata.teams[1].teamName} (Group-B){matchdata.teams[1].isBatting ?  <GiCricketBat className={styles.icon}/> : "" }</div>
                                     <div className={styles.runbox}>{matchdata.teams[1].totalRuns}/{matchdata.teams[1].totalWickets}</div>
                                     <div className={styles.overcount}>({matchdata.teams[1].totalOvers}).overs</div>
                                 </div>
@@ -653,7 +665,7 @@ const GamblingPage = () => {
                         <div className={styles.Box1}>
                             <h3>Who Will Win ?</h3>
                             <div className={styles.detailbox}>{matchdata.teams[0].teamName} Win against {matchdata.teams[1].teamName}</div>
-                            <div className={styles.parabox}>If you are intrested please press:</div>
+                            <div className={styles.parabox}>If you are intrested with ₹100:</div>
                             <div className={styles.buttonContainer}>
                                 <button className={styles.yesbutton} onClick={() => handelWiningTeam("yes")}>YES</button>
                                 <button className={styles.nobutton} onClick={() => handelWiningTeam("no")}>NO</button>
@@ -663,7 +675,7 @@ const GamblingPage = () => {
                         <div className={styles.Box1}>
                             <h3>Total Runs</h3>
                             <div className={styles.detailbox}>Total Runs more than 120</div>
-                            <div className={styles.parabox}>If you are intrested please press:</div>
+                            <div className={styles.parabox}>If you are intrested with ₹100</div>
                             <div className={styles.buttonContainer}>
                                 <button className={styles.yesbutton} onClick={() => handelTotalRuns("yes")}>YES</button>
                                 <button className={styles.nobutton} onClick={() => handelTotalRuns("no")}>NO</button>
@@ -673,7 +685,7 @@ const GamblingPage = () => {
                         <div className={styles.Box1}>
                             <h3>More Then 20</h3>
                             <div className={styles.detailbox}>After 2 over Run more than 20</div>
-                            <div className={styles.parabox}>If you are intrested please press:</div>
+                            <div className={styles.parabox}>If you are intrested with ₹100</div>
                             <div className={styles.buttonContainer}>
                                 <button className={styles.yesbutton} onClick={() => handelAfterTwoOvers("yes")}>YES</button>
                                 <button className={styles.nobutton} onClick={() => handelAfterTwoOvers("no")}>NO</button>
@@ -683,7 +695,7 @@ const GamblingPage = () => {
                         <div className={styles.Box1}>
                             <h3>More Then 80</h3>
                             <div className={styles.detailbox}>After 5 over Run more than 80</div>
-                            <div className={styles.parabox}>If you are intrested please press:</div>
+                            <div className={styles.parabox}>If you are intrested with ₹100</div>
                             <div className={styles.buttonContainer}>
                                 <button className={styles.yesbutton} onClick={() => handelAfterFiveOvers("yes")}>YES</button>
                                 <button className={styles.nobutton} onClick={() => handelAfterFiveOvers("no")}>NO</button>
@@ -693,7 +705,7 @@ const GamblingPage = () => {
                         <div className={styles.Box1}>
                             <h3>Predection totalWicket</h3>
                             <div className={styles.detailbox}> Total Wickets more Than 6</div>
-                            <div className={styles.parabox}>If you are intrested please press:</div>
+                            <div className={styles.parabox}>If you are intrested with ₹100</div>
                             <div className={styles.buttonContainer}>
                                 <button className={styles.yesbutton} onClick={() => handelTotalWicket("yes")}>YES</button>
                                 <button className={styles.nobutton} onClick={() => handelTotalWicket("no")}>NO</button>

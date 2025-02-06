@@ -10,39 +10,55 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false); // ✅ Track loading state
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+      e.preventDefault();
+      setLoading(true); // Start loading
 
-    try {
-      const response = await axios.post('http://localhost:3000/api/login', {
-        email,
-        password,
-      },{ withCredentials: true });
-      console.log('Logged in successfully!');
-    // const { token } = response.data; // Extract token from response
-    // console.log("client",token);
-    console.log(response.data);
-    
-    // Save token to localStorage
-    // localStorage.setItem('authToken', token);
+      try {
+          // ✅ Step 1: Log in the user
+          const response = await axios.post(`${import.meta.env.VITE_BACKENDURL}/api/login`, {
+              email,
+              password,
+          }, { withCredentials: true });
 
-    // cretae balance for the user
-     const response1 = await axios.get('http://localhost:3000/api/balance', {
-      withCredentials: true,
-    });
-    if(response1.data){
-      console.log("User already have balance");
-    }else{
-      await axios.post('http://localhost:3000/api/balance', {}, { withCredentials: true });
-    }
-    
-    // Navigate to the next page
-    navigate('/p');
-    } catch (error) {
-        console.log('Error: ' + error.response?.data || error.message);
-    }
+          console.log('Logged in successfully!', response.data);
+
+          // ✅ Step 2: Wait for session to be established
+          await new Promise((resolve) => setTimeout(resolve, 500));
+
+          // ✅ Step 3: Check if the user has a balance
+          try {
+              const response1 = await axios.get(`${import.meta.env.VITE_BACKENDURL}/api/balance`, {
+                  withCredentials: true,
+              });
+
+              console.log("User balance:", response1.data);
+          } catch (error) {
+              if (error.response?.status === 404) {
+                  console.log("User does not have a balance. Creating one...");
+
+                  // ✅ Step 4: Create balance if it doesn't exist
+                  await axios.post(`${import.meta.env.VITE_BACKENDURL}/api/balance`, {}, { withCredentials: true });
+
+                  console.log("Balance created successfully!");
+              } else {
+                  throw error; // Throw other errors
+              }
+          }
+
+          // ✅ Step 5: Navigate to the dashboard after balance is successfully created
+          console.log("Navigating to home...");
+          navigate('/');
+
+      } catch (error) {
+          console.error('Login error:', error.response?.data || error.message);
+      } finally {
+          setLoading(false); // Stop loading
+      }
   };
+
 
   return (
     <form className={styles.formContainer} onSubmit={handleSubmit}>
@@ -76,6 +92,7 @@ const Login = () => {
           </button>
         </div>
       </div>
+      <p>If you are not login please register <span style={{color:"royalblue",textDecoration:"underline",cursor:"pointer",paddingLeft:"1rem"}} onClick={()=>navigate('/register')}>register</span></p>
       <button type="submit" className={styles.submitButton}>
         Login
       </button>

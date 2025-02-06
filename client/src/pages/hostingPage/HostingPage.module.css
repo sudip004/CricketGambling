@@ -118,7 +118,14 @@ justify-content: space-around;
     border: none;
     outline: none;
     border-radius: 5px;
+    font-size: 0.8rem;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+.extrabolscontainer>button:hover{
+    background: #f5e8e8;
+    color: #d10a7e;
+    transform: scaleX(1.1);
 }
 
 .currentBatterContainer{
@@ -233,6 +240,7 @@ cursor: pointer;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
     border-radius: 40px;
+    font-size: 1rem;
     border: none;
     outline: none;
     cursor: pointer;
@@ -253,7 +261,51 @@ align-items: center;
 justify-content: center;
 gap: 2rem;
 /* border: 2px solid green; */
-
+}
+.secBox{
+    width: 10rem;
+    height: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid rgb(255, 254, 254);
+}
+.secBox>label{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    color: #FFF;
+}
+.selectBox{
+    font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+.selectBox>option{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    color: #111010;
+}
+.bbtn{
+    width: 6rem;
+    height: 2rem;
+    background: #d10a7e;
+    color: #fdfcfd;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    border-radius: 2rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+.bbtn:hover{
+    background: #fdfcfd;
+    color: #d10a7e;
+    transform: scaleX(1.1);
 }
 .teamContainer{
 width: 24rem;

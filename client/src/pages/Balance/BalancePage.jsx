@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import styles from './BalancePage.module.css'
 import axios from 'axios';
+import { IoIosArrowRoundBack } from "react-icons/io";
+import {useNavigate} from "react-router-dom"
 
 const BalancePage = () => {
+
+  const navigate = useNavigate()
 
   const [amount, setAmount] = useState(null);
   console.log("amount", amount)
@@ -11,7 +15,7 @@ const BalancePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/balance', {
+        const response = await axios.get(`${import.meta.env.VITE_BACKENDURL}/api/balance`, {
           withCredentials: true,
         });
 
@@ -33,7 +37,7 @@ const BalancePage = () => {
         return;
       }
 
-      const response = await axios.patch('http://localhost:3000/api/balance', {
+      const response = await axios.patch(`${import.meta.env.VITE_BACKENDURL}/api/balance`, {
         balance: amount.balance + 100,
       }, {
         withCredentials: true,
@@ -51,6 +55,7 @@ const BalancePage = () => {
       {
         amount ? (
           <div className={styles.maincontainer}>
+            <div className={styles.backbtn}><IoIosArrowRoundBack className={styles.iconback} onClick={()=>navigate("/")}/></div>
             <div className={styles.balanceBox}>
               <h1>Account Balance</h1>
               <h2>₹ {amount.balance}</h2>

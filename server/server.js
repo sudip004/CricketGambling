@@ -15,8 +15,8 @@ const port =process.env.PORT || 3000;
 
 app.use(
     cors({
-      origin: 'http://localhost:5173', // Adjust the origin to your frontend's URL
-      credentials: true, // Allow credentials (cookies) to be sent
+      origin: `${process.env.FRONTEND_URL}`, 
+      credentials: true, 
     })
   );
   app.use(express.json());

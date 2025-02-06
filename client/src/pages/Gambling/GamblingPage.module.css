@@ -1,4 +1,5 @@
 .maincontainer{
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
@@ -8,6 +9,30 @@
     background: linear-gradient(180deg, rgba(29,29,34,0.989233193277311) 15%, rgba(41,55,47,0.9836309523809523) 100%);
     gap: 1.3rem;
 }
+.backbtn{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    }
+    .iconbackk{
+        width: 2rem;
+        height: 2rem;
+        color: #FFF;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    .iconbackk:hover{
+        transform: scaleX(1.2);
+    }
 
 .firstcontainer{
     margin-top: 1.5rem;
@@ -176,6 +201,8 @@ box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.2);
     font-size: 1.3rem;
 }
 .detailbox{
+    text-align: center;
+    word-wrap: break-word;
 width: 100%;
 height: 2.5rem;
 font-size: 1.1rem;
@@ -245,4 +272,8 @@ color: #FFF;
 }
 
 
-
+.icon{
+    width: 1.4rem;
+    height: 1.2rem;
+    color: #912a2a;
+}

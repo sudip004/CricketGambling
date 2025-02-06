@@ -11,6 +11,8 @@ import Login from './pages/userCredentials/Login';
 import LiveMatchData from './pages/liveMatches/LiveMatchData';
 import GamblingPage from './pages/Gambling/GamblingPage';
 import BalancePage from './pages/Balance/BalancePage';
+import UpCommingMatch from './pages/upcomming/UpCommingMatch';
+import Logout from './pages/userCredentials/Logout';
 
 
 
@@ -24,12 +26,14 @@ export const App = () => {
           <Routes>
             
             <Route path="/:id" element={<HostingPage />} />
-            <Route path="/p" element={<PlayerListCreate/>} />
-            <Route path="/r" element={<Register/>} />
-            <Route path="/l" element={<Login/>} />
+            <Route path="/playerlistcreate" element={<PlayerListCreate/>} />
+            <Route path="/register" element={<Register/>} />
+            <Route path="/login" element={<Login/>} />
             <Route path="/" element={<LiveMatchData/>} />
             <Route path="/home-matchdelails/:id" element={<GamblingPage/>} />
-            <Route path="/b" element={<BalancePage/>} />
+            <Route path="/balance" element={<BalancePage/>} />
+            <Route path="/upcomming" element={<UpCommingMatch/>} />
+            <Route path="/logout" element={<Logout/>} />
           </Routes>
         </Suspense>
       </div>

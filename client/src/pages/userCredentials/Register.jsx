@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './Register.module.css';
+import{useNavigate} from 'react-router-dom'
 
 const Register = () => {
+  const navigate = useNavigate()
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,7 +15,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/api/register', {
+      const response = await axios.post(`${import.meta.env.VITE_BACKENDURL}/api/register`, {
         name,
         email,
         password,
@@ -21,6 +23,7 @@ const Register = () => {
       });
       console.log('Registered successfully!');
       console.log(response.data);
+      navigate('/login')
     } catch (error) {
         console.log('Error: ' + error.response?.data || error.message);
     }

@@ -22,7 +22,7 @@ const LiveMatchData = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/findlivematches`, {
+                const response = await axios.get(`${import.meta.env.VITE_BACKENDURL}/api/findlivematches`, {
                     withCredentials: true
                 });
                 setmatchdata(response.data)
@@ -45,18 +45,19 @@ const LiveMatchData = () => {
                 </div>
             </div>
             <div className={styles.navbarBox}>
-                <NavLink to="/liveMatches" className={styles.navbarLink} >Live Matches</NavLink>
-                <NavLink to="/liveMatches" className={styles.navbarLink} >Upcomming Matches</NavLink>
-                <NavLink to="/liveMatches" className={styles.navbarLink} >Turnaments</NavLink>
-                <NavLink to="/liveMatches" className={styles.navbarLink} >Account Balance</NavLink>
-                <NavLink to="/liveMatches" className={styles.navbarLink} >Logout</NavLink>
-                <NavLink to="/liveMatches" className={styles.navbarLink} >Hosting</NavLink>
+                <NavLink to="/" className={styles.navbarLink} >Live Matches</NavLink>
+                <NavLink to="/upcomming" className={styles.navbarLink} >Upcomming Matches</NavLink>
+                <NavLink to="/" className={styles.navbarLink} >Turnaments</NavLink>
+                <NavLink to="/balance" className={styles.navbarLink} >Account Balance</NavLink>
+                <NavLink to={matchdata ? "/logout":"/login"} className={styles.navbarLink} >{matchdata ? "logout":"login"}</NavLink>
+                <NavLink to="/playerlistcreate" className={styles.navbarLink} >Hosting</NavLink>
             </div>
 
             <div className={styles.scrollcontainer}>
                 {/* main container Box Working */}
                 {
-                    (matchdata) ? matchdata.map((item, i) => (
+                    (matchdata) ? matchdata
+                    .map((item, i) => (
                         <div className={styles.mainBoxContainer} key={i}>
                             <div className={styles.Boxnavber}>
                                 <div className={styles.datecontainer}>Date: Today <span className={styles.livebox}>Live</span></div>
@@ -66,14 +67,14 @@ const LiveMatchData = () => {
                             <div className={styles.boxBody}>
                                 <div className={styles.leftBox}>
                                     <div className={styles.logo}></div>
-                                    <p className={styles.teamname}>{item.teams[0].teamName} (group-A){item.teams[0].isMatchEnded ? <BiSolidCricketBall className={styles.icon}/> : <GiCricketBat className={styles.icon}/>}</p>
+                                    <p className={styles.teamname}>{item.teams[0].teamName} (group-A){item.teams[0].isBatting ?  <GiCricketBat className={styles.icon}/> : <BiSolidCricketBall className={styles.icon}/> }</p>
                                     <div className={styles.runscontainer}>{item.teams[0].totalRuns}/{item.teams[0].totalWickets}</div>
                                     <p className={styles.overscon}>({item.teams[0].totalOvers}.overs)</p>
                                 </div>
                                 <div className={styles.vs}>V/S</div>
                                 <div className={styles.leftBox}>
                                     <div className={styles.logo1}></div>
-                                    <p className={styles.teamname}>{item.teams[1].teamName} (group-B){item.teams[1].isMatchEnded ? <BiSolidCricketBall className={styles.icon}/> : <GiCricketBat className={styles.icon}/>}</p>
+                                    <p className={styles.teamname}>{item.teams[1].teamName} (group-B){item.teams[1].isBatting ?  <GiCricketBat className={styles.icon}/> : <BiSolidCricketBall className={styles.icon}/> }</p>
                                     <div className={styles.runscontainer}>{item.teams[1].totalRuns}/{item.teams[1].totalWickets}</div>
                                     <p className={styles.overscon}>({item.teams[1].totalOvers}.overs)</p>
                                 </div>
